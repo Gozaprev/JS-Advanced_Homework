@@ -63,13 +63,16 @@ function fetchData() {
                 .filter(student => student.gender === 'Female' && student.age > 24);
             const averageGradeFemaleOver24 = femaleStudentsOver24.reduce((acc, student) => acc + student.averageGrade, 0) / femaleStudentsOver24.length;
             console.log('Average grades of female students over 24:', averageGradeFemaleOver24);
+            console.log('Type of femaleStudentsOver24', typeof(femaleStudentsOver24));
+
 
             const output4 = averageGradeFemaleOver24.length !== 0 ? averageGradeFemaleOver24 : 'There is no such student';
             console.log('Average grades of female students over 24:', output4);
 
             // 5. All male students with a name starting with B and average grade over 2
             const maleStudentsB = data
-                .filter(student => student.gender === 'Male' && student.firstName.startsWith('B') && student.averageGrade > 2);
+                .filter(student => student.gender === 'Male' && student.firstName.startsWith('B') && student.averageGrade > 2)
+                .map(student => `${student.firstName} ${student.lastName}`);
             console.log('Male students with name starting with B and average grade over 2:', maleStudentsB);
 
             const output5 = maleStudentsB.length !== 0 ? maleStudentsB : 'There is no such student';

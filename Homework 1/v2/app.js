@@ -11,22 +11,29 @@ fetch('https://raw.githubusercontent.com/sedc-codecademy/skwd9-04-ajs/main/Sampl
         console.log('Students with average grade higher than 3:', studentsAbove3);
 
         // 2. All female student names with an average grade of 5
+
         const femaleStudentsWith5 = data
-            .filter(student => student.gender === 'Female');
-        // .map(student => student.firstName);
-        console.log(femaleStudentsWith5);
-
-        const femSt5 = data
-            .filter(student => student.gender === 'Female' && student.averageGrade === 5)
-            .map(student => student.firstName);
-        console.log(femSt5);
+            .filter(student => student.gender === 'Female' && student.averageGrade === 5) 
+            .map(student => student.firstName); 
+        console.log('Female students with average grade of 5:', femaleStudentsWith5);
 
 
-        const o1 = data.filter(student => student.gender[4] && student.averageGrade === 5).map(student => student.firstName);
+        // const femaleStudentsWith5 = data
+        //     .filter(student => student.gender === 'Female');
+        // // .map(student => student.firstName);
+        // console.log(femaleStudentsWith5);
+
+        // const femSt5 = data
+        //     .filter(student => student.gender === 'Female' && student.averageGrade === 5)
+        //     .map(student => student.firstName);
+        // console.log(femSt5);
+
+
+        // const o1 = data.filter(student => student.gender[4] && student.averageGrade === 5).map(student => student.firstName);
 
 
 
-        console.log('Female students with average grade of 5:', o1);
+        // console.log('Female students with average grade of 5:', o1);
 
         // 3. All male student full names who live in Skopje and are over 18 years old
         const maleStudentsInSkopje = data
@@ -59,7 +66,8 @@ fetch('https://raw.githubusercontent.com/sedc-codecademy/skwd9-04-ajs/main/Sampl
 
         // 5. All male students with a name starting with B and average grade over 2
         const maleStudentsB = data
-            .filter(student => student.gender === 'Male' && student.firstName.startsWith('B') && student.averageGrade > 2);
+            .filter(student => student.gender === 'Male' && student.firstName.startsWith('B') && student.averageGrade > 2)
+            .map(student => `${student.firstName} ${student.lastName}`);
         console.log('Male students with name starting with B and average grade over 2:', maleStudentsB);
     })
     .catch(error => console.error('Error fetching data:', error));
