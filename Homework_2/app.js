@@ -48,19 +48,30 @@ const renderResults = students => {
         .map(student => `${student.firstName} ${student.lastName}`);
 
     // Find top 10 best students by average grade without mutating original data
-    const topStudents = [];
-    for (const student of students) {
-        if (topStudents.length < 10) {
-            topStudents.push({ ...student }); // Create a copy of the student object
-        } else {
-            const minIndex = topStudents.reduce((minIdx, currStudent, idx) =>
-                currStudent.averageGrade < topStudents[minIdx].averageGrade ? idx : minIdx, 0);
-            if (student.averageGrade > topStudents[minIndex].averageGrade) {
-                topStudents[minIndex] = { ...student }; // Replace with a copy of the new student
-            }
-        }
-    }
-    const topStudentNames = topStudents.map(student => `${student.firstName} ${student.lastName}`);
+
+    // const topStudents = [];
+    // for (const student of students) {
+    //     if (topStudents.length < 10) {
+    //         topStudents.push({ ...student }); // Create a copy of the student object
+    //     } else {
+    //         const minIndex = topStudents.reduce((minIdx, currStudent, idx) =>
+    //             currStudent.averageGrade < topStudents[minIdx].averageGrade ? idx : minIdx, 0);
+    //         if (student.averageGrade > topStudents[minIndex].averageGrade) {
+    //             topStudents[minIndex] = { ...student }; // Replace with a copy of the new student
+    //         }
+    //     }
+    // }
+
+    // const topStudentNames = topStudents.map(student => `${student.firstName} ${student.lastName}`);
+
+    const deepStudentsCopy = JSON.parse(JSON.stringify(students));
+
+    const topStudents = deepStudentsCopy
+        // .slice() // Create a shallow copy of the students array
+        .sort((a, b) => b.averageGrade - a.averageGrade) // Sort in descending order by average grade
+        .slice(0, 10) // Take the top 10 students
+        .map(student => `${student.firstName} ${student.lastName}`);
+
 
     // Check if some users have an average grade of 1 or if all users are adults
     const hasAverageGradeOne = students.some(student => student.averageGrade === 1);
@@ -85,7 +96,7 @@ const renderResults = students => {
         <h3>Students with last name longer than 8 characters:</h3>
         <ul>${longLastNames.map(name => `<li>${name}</li>`).join('')}</ul>
         <h3>Top 10 Best Students:</h3>
-        <ul>${topStudentNames.map(name => `<li>${name}</li>`).join('')}</ul>
+        <ul>${topStudents.map(name => `<li>${name}</li>`).join('')}</ul>
         <p>Some users have an average grade of 1: ${hasAverageGradeOne}</p>
         <p>All users are adults: ${allAdults}</p>
         `;
