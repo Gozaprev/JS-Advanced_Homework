@@ -20,6 +20,10 @@ class Student extends Person {
         this.studentId = studentId;
     }
 
+    // getFullName() {
+    //     return `${this.firstName} ${this.lastName}`;
+    // }
+
     study() {
         console.log(`${this.firstName} is studying at the ${this.academyName} academy.`);
     }
@@ -29,20 +33,29 @@ class Student extends Person {
 
 
 class DesignStudent extends Student {
-    constructor(firstName, lastName, age, academyName, studentId, isStudentOfTheMonth) {
-        super(firstName, lastName, age, '', studentId);
-        this.academyName = academyName;
+    constructor(firstName, lastName, age, studentId, isStudentOfTheMonth) {
+        super(firstName, lastName, age, 'design', studentId);
+        // this.academyName = academyName;
         this.isStudentOfTheMonth = isStudentOfTheMonth;
+        // const studentStatus = this.isStudentOfTheMonth ? 'student of the month' : 'not student of the month';
+
+        // this.printDesignStudent = function () {
+        //     console.log(
+        //       `${this.firstName} ${this.lastName} is ${this.age} years old. ${this.firstName} 
+        //       studies ${this.academyName} and his student ID is ${this.studentId}. 
+        //       This student is ${studentStatus}.`
+        //     );
+        //   };
+
+    }
+
+    printDesignStudent() {
         const studentStatus = this.isStudentOfTheMonth ? 'student of the month' : 'not student of the month';
-
-        this.printDesignStudent = function () {
-            console.log(
-              `${this.firstName} ${this.lastName} is ${this.age} years old. ${this.firstName} 
-              studies ${this.academyName} and his student ID is ${this.studentId}. 
-              This student is ${studentStatus}.`
-            );
-          };
-
+        console.log(
+            `${this.firstName} ${this.lastName} is ${this.age} years old. ${this.firstName} 
+            studies ${this.academyName} and his student ID is ${this.studentId}. 
+            This student is ${studentStatus}.`
+        );
     }
 
     
@@ -55,27 +68,29 @@ class DesignStudent extends Student {
 }
 
 class CodeStudent extends Student {
-    constructor(firstName, lastName, age, academyName, studentId) {
-        super(firstName, lastName, age, '', studentId);
-        this.academyName = academyName;
+    constructor(firstName, lastName, age, studentId) {
+        super(firstName, lastName, age, 'code', studentId);
+        // this.academyName = academyName;
+        this.#hasIndividualProject = false;
+        this.#hasGroupProject = false;
 
-        this.printCodeStudent = function () {
+        // this.printCodeStudent = function () {
 
-            const projectType = this.#hasGroupProject ? 'group' : 'individual'; 
-            this.doProject(projectType);
+        //     const projectType = this.#hasGroupProject ? 'group' : 'individual'; 
+        //     this.doProject(projectType);
 
-            console.log(
-              `${this.firstName} ${this.lastName} is ${this.age} years old. ${this.firstName} 
-              studies ${this.academyName} and his student ID is ${this.studentId}. 
-              This student is working on ${projectType} project.`
-            );
-          };
+        //     console.log(
+        //       `${this.firstName} ${this.lastName} is ${this.age} years old. ${this.firstName} 
+        //       studies ${this.academyName} and his student ID is ${this.studentId}. 
+        //       This student is working on ${projectType} project.`
+        //     );
+        //   };
 
 
     }
 
-    #hasIndividualProject = false;
-    #hasGroupProject = false;
+    #hasIndividualProject;
+    #hasGroupProject;
 
     get hasIndividualProject() {
         return this.#hasIndividualProject;
@@ -97,25 +112,44 @@ class CodeStudent extends Student {
         }
     }
 
+    printCodeStudent() {
+        const projectType = this.hasGroupProject ? 'group' : 'individual';
+        this.doProject(projectType);
+
+        console.log(
+            `${this.firstName} ${this.lastName} is ${this.age} years old. ${this.firstName} 
+            studies ${this.academyName} and his student ID is ${this.studentId}. 
+            This student is working on a ${projectType} project.`
+        );
+    }
+
 }
 
     
 class NetworkStudent extends Student {
-    constructor(firstName, lastName, age, academyName, studentId, academyPart) {
-        super(firstName, lastName, age, academyName, studentId);
-        this.academyName = academyName;
+    constructor(firstName, lastName, age, studentId, academyPart) {
+        super(firstName, lastName, age, 'network', studentId);
+        // this.academyName = academyName;
         this.academyPart = academyPart;
 
-        this.printNetworkStudent = function () {
-            console.log(
-              `${this.firstName} ${this.lastName} is ${this.age} years old. ${this.firstName} 
-              studies ${this.academyName} and his student ID is ${this.studentId}. 
-              This student is enrolled into part ${academyPart} of the Academy.`
-            );
-          };
+        // this.printNetworkStudent = function () {
+        //     console.log(
+        //       `${this.firstName} ${this.lastName} is ${this.age} years old. ${this.firstName} 
+        //       studies ${this.academyName} and his student ID is ${this.studentId}. 
+        //       This student is enrolled into part ${academyPart} of the Academy.`
+        //     );
+        //   };
 
 
 
+    }
+
+    printNetworkStudent() {
+        console.log(
+            `${this.firstName} ${this.lastName} is ${this.age} years old. ${this.firstName} 
+            studies ${this.academyName} and his student ID is ${this.studentId}. 
+            This student is enrolled into part ${this.academyPart} of the Academy.`
+        );
     }
 
     attendCiscoExam() {
